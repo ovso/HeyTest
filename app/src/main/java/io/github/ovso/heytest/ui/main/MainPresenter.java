@@ -11,5 +11,9 @@ public interface MainPresenter {
     void navigateToBrand();
 
     void showSearchText(String text);
+
+    void setupRecyclerView();
+
+    void refresh();
   }
 }

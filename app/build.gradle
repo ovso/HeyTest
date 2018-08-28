@@ -58,6 +58,7 @@ dependencies {
   // lombok
   compileOnly "org.projectlombok:lombok:$rootProject.lombok_version"
   annotationProcessor "org.projectlombok:lombok:$rootProject.lombok_version"
+  compileOnly 'javax.annotation:jsr250-api:1.0'
 
   // retrofit
   implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
