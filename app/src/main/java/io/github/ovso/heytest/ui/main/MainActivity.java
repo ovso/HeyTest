@@ -2,26 +2,31 @@ package io.github.ovso.heytest.ui.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.github.ovso.heytest.R;
 import io.github.ovso.heytest.ui.base.BaseActivity;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterView;
+import io.github.ovso.heytest.ui.base.adapter.MyViewRecyclerView;
+import io.github.ovso.heytest.ui.base.adapter.OnRecyclerViewItemClickListener;
 import io.github.ovso.heytest.ui.brand.BrandActivity;
+import io.github.ovso.heytest.ui.detail.DetailActivity;
 import io.github.ovso.heytest.ui.main.adapter.MainAdapter;
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity implements MainPresenter.View {
+public class MainActivity extends BaseActivity implements MainPresenter.View,
+    OnRecyclerViewItemClickListener {
 
   @Inject MainPresenter presenter;
   @Inject MainAdapter adapter;
   @Inject BaseAdapterView adapterView;
 
-  @BindView(R.id.recycler_view) RecyclerView recyclerView;
+  @BindView(R.id.recycler_view) MyViewRecyclerView recyclerView;
   @BindView(R.id.search_text_view) TextView searchTextView;
 
   @Override protected int getLayoutResID() {
@@ -50,11 +55,23 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
   }
 
   @Override public void setupRecyclerView() {
-    recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    //recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
+    recyclerView.setOnItemClickListener(this);
   }
 
   @Override public void refresh() {
     adapterView.refresh();
+  }
+
+  @Override public void navigateToDetail(Object data) {
+    Intent intent = new Intent(this, DetailActivity.class);
+    intent.putExtra("data", (Parcelable) data);
+    startActivity(intent);
+  }
+
+  @Override public void onListItemClick(View view, Object data, int itemPosition) {
+    presenter.onListItemClick(data, itemPosition);
   }
 }

@@ -1,25 +1,23 @@
 package io.github.ovso.heytest.ui.main.adapter;
 
-import android.view.View;
-import io.github.ovso.heytest.R;
+import android.view.ViewGroup;
 import io.github.ovso.heytest.data.network.model.Cars;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterDataModel;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterView;
 import io.github.ovso.heytest.ui.base.adapter.BaseRecyclerAdapter;
 import io.github.ovso.heytest.ui.base.adapter.BaseViewHolder;
+import io.github.ovso.heytest.ui.base.adapter.OnRecyclerViewItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Setter;
 
 public class MainAdapter extends BaseRecyclerAdapter implements BaseAdapterView,
     BaseAdapterDataModel<Cars> {
+  @Setter private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
   private List<Cars> items = new ArrayList<>();
 
-  @Override protected BaseViewHolder createViewHolder(View view, int viewType) {
-    return MainViewHolder.create(view.getContext());
-  }
-
-  @Override public int getLayoutRes(int viewType) {
-    return R.layout.list_item_main;
+  @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    return MainViewHolder.create(parent);
   }
 
   @Override
@@ -27,6 +25,8 @@ public class MainAdapter extends BaseRecyclerAdapter implements BaseAdapterView,
     if (viewHolder instanceof MainViewHolder) {
       MainViewHolder holder = (MainViewHolder) viewHolder;
       holder.bind(items.get(position));
+      holder.setOnRecyclerViewItemClickListener(onRecyclerViewItemClickListener);
+      holder.setItemPosition(position);
     }
   }
 

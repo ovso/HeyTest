@@ -6,6 +6,8 @@ public interface MainPresenter {
 
   void onSearchClick();
 
+  void onListItemClick(Object data, int itemPosition);
+
   interface View {
 
     void navigateToBrand();
@@ -15,5 +17,7 @@ public interface MainPresenter {
     void setupRecyclerView();
 
     void refresh();
+
+    void navigateToDetail(Object data);
   }
 }

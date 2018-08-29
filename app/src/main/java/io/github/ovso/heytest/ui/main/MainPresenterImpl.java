@@ -51,4 +51,9 @@ public class MainPresenterImpl implements MainPresenter {
   @Override public void onSearchClick() {
     view.navigateToBrand();
   }
+
+  @Override public void onListItemClick(Object data, int itemPosition) {
+    Timber.d("data = " + data);
+    view.navigateToDetail(data);
+  }
 }
