@@ -1,7 +1,7 @@
 package io.github.ovso.heytest.ui.main.adapter;
 
 import android.view.ViewGroup;
-import io.github.ovso.heytest.data.network.model.Cars;
+import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterDataModel;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterView;
 import io.github.ovso.heytest.ui.base.adapter.BaseRecyclerAdapter;
@@ -12,9 +12,9 @@ import java.util.List;
 import lombok.Setter;
 
 public class MainAdapter extends BaseRecyclerAdapter implements BaseAdapterView,
-    BaseAdapterDataModel<Cars> {
+    BaseAdapterDataModel<Car> {
   @Setter private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
-  private List<Cars> items = new ArrayList<>();
+  private List<Car> items = new ArrayList<>();
 
   @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     return MainViewHolder.create(parent);
@@ -34,23 +34,23 @@ public class MainAdapter extends BaseRecyclerAdapter implements BaseAdapterView,
     return getSize();
   }
 
-  @Override public void add(Cars item) {
+  @Override public void add(Car item) {
     items.add(item);
   }
 
-  @Override public void addAll(List<Cars> $items) {
+  @Override public void addAll(List<Car> $items) {
     items.addAll($items);
   }
 
-  @Override public Cars remove(int position) {
+  @Override public Car remove(int position) {
     return items.remove(position);
   }
 
-  @Override public Cars getItem(int position) {
+  @Override public Car getItem(int position) {
     return items.get(position);
   }
 
-  @Override public void add(int index, Cars item) {
+  @Override public void add(int index, Car item) {
     items.add(index, item);
   }
 

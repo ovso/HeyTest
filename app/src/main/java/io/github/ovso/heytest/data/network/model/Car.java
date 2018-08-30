@@ -7,7 +7,7 @@ import io.github.ovso.heytest.R;
 import lombok.Getter;
 import lombok.ToString;
 
-@Getter @ToString public class Cars implements Parcelable {
+@Getter @ToString public class Car implements Parcelable {
   private int id;
   private String main_image_url;
   private String status;
@@ -20,7 +20,7 @@ import lombok.ToString;
   private int discounted_price;
   private String absolute_url;
 
-  protected Cars(Parcel in) {
+  protected Car(Parcel in) {
     id = in.readInt();
     main_image_url = in.readString();
     status = in.readString();
@@ -34,15 +34,15 @@ import lombok.ToString;
     absolute_url = in.readString();
   }
 
-  public static final Creator<Cars> CREATOR = new Creator<Cars>() {
+  public static final Creator<Car> CREATOR = new Creator<Car>() {
     @Override
-    public Cars createFromParcel(Parcel in) {
-      return new Cars(in);
+    public Car createFromParcel(Parcel in) {
+      return new Car(in);
     }
 
     @Override
-    public Cars[] newArray(int size) {
-      return new Cars[size];
+    public Car[] newArray(int size) {
+      return new Car[size];
     }
   };
 

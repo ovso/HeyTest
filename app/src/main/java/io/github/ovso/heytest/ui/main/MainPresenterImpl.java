@@ -2,7 +2,7 @@ package io.github.ovso.heytest.ui.main;
 
 import io.github.ovso.heytest.R;
 import io.github.ovso.heytest.data.network.MainRequest;
-import io.github.ovso.heytest.data.network.model.Cars;
+import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterDataModel;
 import io.github.ovso.heytest.utils.ResourceProvider;
 import io.github.ovso.heytest.utils.SchedulersFacade;
@@ -15,17 +15,17 @@ public class MainPresenterImpl implements MainPresenter {
 
   private MainPresenter.View view;
   private ResourceProvider resourceProvider;
-  private MainRequest net;
+  private MainRequest mainRequest;
   private CompositeDisposable compositeDisposable = new CompositeDisposable();
   private SchedulersFacade schedulers;
-  private BaseAdapterDataModel<Cars> adapterDataModel;
+  private BaseAdapterDataModel<Car> adapterDataModel;
 
   public MainPresenterImpl(MainPresenter.View $view, ResourceProvider $ResourceProvider,
-      MainRequest $net, SchedulersFacade $schedulers,
-      BaseAdapterDataModel<Cars> $adapterDataModel) {
+      MainRequest $mainRequest, SchedulersFacade $schedulers,
+      BaseAdapterDataModel<Car> $adapterDataModel) {
     view = $view;
     resourceProvider = $ResourceProvider;
-    net = $net;
+    mainRequest = $mainRequest;
     schedulers = $schedulers;
     adapterDataModel = $adapterDataModel;
   }
@@ -34,9 +34,9 @@ public class MainPresenterImpl implements MainPresenter {
     view.showSearchText(resourceProvider.getString(R.string.car_search));
     view.setupRecyclerView();
     compositeDisposable.add(
-        net.getCars().subscribeOn(schedulers.io()).observeOn(schedulers.ui()).subscribe(
-            new Consumer<List<Cars>>() {
-              @Override public void accept(List<Cars> items) throws Exception {
+        mainRequest.getCars().subscribeOn(schedulers.io()).observeOn(schedulers.ui()).subscribe(
+            new Consumer<List<Car>>() {
+              @Override public void accept(List<Car> items) throws Exception {
                 Timber.d(items.toString());
                 adapterDataModel.addAll(items);
                 view.refresh();

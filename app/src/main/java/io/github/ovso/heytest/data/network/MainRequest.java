@@ -1,6 +1,6 @@
 package io.github.ovso.heytest.data.network;
 
-import io.github.ovso.heytest.data.network.model.Cars;
+import io.github.ovso.heytest.data.network.model.Car;
 import io.reactivex.Single;
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +27,14 @@ public class MainRequest extends BaseRequest<MainService> {
     return ApiEndPoint.CARS.getUrl();
   }
 
-  public Single<List<Cars>> getCars() {
+  public Single<List<Car>> getCars() {
     Map<String, String> queryMap = new HashMap<>();
     queryMap.put("format", "json");
     queryMap.put("page", "1");
     return getApi().getCars(queryMap);
+  }
+
+  public Single<Object> getCarDetail() {
+    return getApi().getCarDetail(3113);
   }
 }

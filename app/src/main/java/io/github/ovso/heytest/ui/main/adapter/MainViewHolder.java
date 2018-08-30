@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import io.github.ovso.heytest.R;
-import io.github.ovso.heytest.data.network.model.Cars;
+import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.ui.base.adapter.BaseViewHolder;
 import io.github.ovso.heytest.ui.base.adapter.OnRecyclerViewItemClickListener;
 import lombok.Setter;
@@ -31,16 +31,16 @@ public class MainViewHolder extends BaseViewHolder {
     super(itemView);
   }
 
-  public void bind(Cars cars) {
+  public void bind(Car cars) {
     super.bind(cars);
     Context context = itemView.getContext();
 
     Glide.with(context).load(cars.getMain_image_url()).into(imageView);
     grandPartNameTextView.setText(cars.getGrade_part_name());
     modelPartNameTextView.setText(cars.getModel_part_name());
-    yearTextView.setText(Cars.toYear(context, cars.getYear()));
-    distanceTextView.setText(Cars.toDistance(context, cars.getMileage()));
-    priceTextView.setText(Cars.toPrice(context, cars.getPrice()));
+    yearTextView.setText(Car.toYear(context, cars.getYear()));
+    distanceTextView.setText(Car.toDistance(context, cars.getMileage()));
+    priceTextView.setText(Car.toPrice(context, cars.getPrice()));
   }
 
   public static MainViewHolder create(ViewGroup parent) {
