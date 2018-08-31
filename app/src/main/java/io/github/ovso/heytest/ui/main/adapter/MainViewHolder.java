@@ -13,8 +13,6 @@ import com.bumptech.glide.Glide;
 import io.github.ovso.heytest.R;
 import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.ui.base.adapter.BaseViewHolder;
-import io.github.ovso.heytest.ui.base.adapter.OnRecyclerViewItemClickListener;
-import lombok.Setter;
 
 public class MainViewHolder extends BaseViewHolder {
   @BindView(R.id.image_view) ImageView imageView;
@@ -24,8 +22,6 @@ public class MainViewHolder extends BaseViewHolder {
   @BindView(R.id.distance_text_view) TextView distanceTextView;
   @BindView(R.id.price_text_view) TextView priceTextView;
   @BindView(R.id.root_view) ConstraintLayout rootView;
-  @Setter private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
-  @Setter private int itemPosition;
 
   private MainViewHolder(View itemView) {
     super(itemView);

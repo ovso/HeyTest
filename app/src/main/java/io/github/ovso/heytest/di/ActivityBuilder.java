@@ -4,6 +4,8 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 import io.github.ovso.heytest.ui.brand.BrandActivity;
+import io.github.ovso.heytest.ui.brand.di.BrandActivityModule;
+import io.github.ovso.heytest.ui.brand.di.BrandActivityViewModule;
 import io.github.ovso.heytest.ui.detail.DetailActivity;
 import io.github.ovso.heytest.ui.detail.di.DetailActivityModule;
 import io.github.ovso.heytest.ui.detail.di.DetailActivityViewModule;
@@ -23,6 +25,8 @@ public abstract class ActivityBuilder {
   abstract MainActivity bindMainActivity();
 
   @Singleton @ContributesAndroidInjector(modules = {
+      BrandActivityModule.class,
+      BrandActivityViewModule.class
   })
   abstract BrandActivity bindBrandActivity();
 

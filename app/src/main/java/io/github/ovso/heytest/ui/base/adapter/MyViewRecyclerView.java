@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import io.github.ovso.heytest.ui.brand.adapter.BrandAdapter;
 import io.github.ovso.heytest.ui.main.adapter.MainAdapter;
 import io.github.ovso.heytest.utils.ObjectUtils;
 
@@ -33,9 +34,14 @@ public class MyViewRecyclerView extends RecyclerView {
   }
 
   private void setOnItemClickListener(Adapter adapter) {
-    if (!ObjectUtils.isEmpty(adapter) && (adapter instanceof MainAdapter)) {
-      ((MainAdapter) adapter).setOnRecyclerViewItemClickListener(
-          onRecyclerViewItemClickListener);
+    if (!ObjectUtils.isEmpty(adapter)) {
+      if ((adapter instanceof MainAdapter)) {
+        ((MainAdapter) adapter).setOnRecyclerViewItemClickListener(
+            onRecyclerViewItemClickListener);
+      } else if (adapter instanceof BrandAdapter) {
+        ((BrandAdapter) adapter).setOnRecyclerViewItemClickListener(
+            onRecyclerViewItemClickListener);
+      }
     }
   }
 }

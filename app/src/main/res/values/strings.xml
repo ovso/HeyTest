@@ -6,4 +6,5 @@
   <string name="km">km</string>
   <string name="distance">만</string>
   <string name="price">만원</string>
+  <string name="brand_select">브랜드 선택</string>
 </resources>
