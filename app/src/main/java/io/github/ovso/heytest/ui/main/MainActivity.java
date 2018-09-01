@@ -20,12 +20,12 @@ import io.github.ovso.heytest.ui.main.adapter.MainAdapter;
 import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity implements MainPresenter.View,
-    OnRecyclerViewItemClickListener {
+    OnRecyclerViewItemClickListener, OnEndlessRecyclerScrollListener.OnLoadMoreListener {
 
   @Inject MainPresenter presenter;
   @Inject MainAdapter adapter;
   @Inject BaseAdapterView adapterView;
-
+  @Inject OnEndlessRecyclerScrollListener onEndlessRecyclerScrollListener;
   @BindView(R.id.recycler_view) MyViewRecyclerView recyclerView;
   @BindView(R.id.search_text_view) TextView searchTextView;
 
@@ -58,6 +58,8 @@ public class MainActivity extends BaseActivity implements MainPresenter.View,
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
     recyclerView.setOnItemClickListener(this);
+    onEndlessRecyclerScrollListener.setLayoutManager(recyclerView.getLayoutManager());
+    recyclerView.addOnScrollListener(onEndlessRecyclerScrollListener);
   }
 
   @Override public void refresh() {
@@ -77,5 +79,9 @@ public class MainActivity extends BaseActivity implements MainPresenter.View,
   @Override protected void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
     presenter.onNewIntent(intent);
+  }
+
+  @Override public void onLoadMore() {
+    presenter.onLoadMore();
   }
 }

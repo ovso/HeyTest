@@ -6,8 +6,10 @@ import io.github.ovso.heytest.data.network.MainRequest;
 import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterDataModel;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterView;
+import io.github.ovso.heytest.ui.main.MainActivity;
 import io.github.ovso.heytest.ui.main.MainPresenter;
 import io.github.ovso.heytest.ui.main.MainPresenterImpl;
+import io.github.ovso.heytest.ui.main.OnEndlessRecyclerScrollListener;
 import io.github.ovso.heytest.ui.main.adapter.MainAdapter;
 import io.github.ovso.heytest.utils.ResourceProvider;
 import io.github.ovso.heytest.utils.SchedulersFacade;
@@ -32,5 +34,12 @@ import javax.inject.Singleton;
 
   @Provides BaseAdapterView provideMainAdapterView(MainAdapter adapter) {
     return adapter;
+  }
+
+  @Singleton @Provides OnEndlessRecyclerScrollListener provideOnEndlessRecyclerScrollListener(
+      OnEndlessRecyclerScrollListener.OnLoadMoreListener loadMoreListener) {
+    OnEndlessRecyclerScrollListener l = new OnEndlessRecyclerScrollListener();
+    l.setOnLoadMoreListener(loadMoreListener);
+    return l;
   }
 }

@@ -3,7 +3,7 @@ package io.github.ovso.heytest.ui.detail;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import io.github.ovso.heytest.App;
-import io.github.ovso.heytest.data.Status;
+import io.github.ovso.heytest.data.SaleStatus;
 import io.github.ovso.heytest.data.network.DetailRequest;
 import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.data.network.model.CarDetail;
@@ -47,7 +47,7 @@ public class DetailPresenterImpl implements DetailPresenter {
             view.showFuel(detail.getFuel());
             view.showStatusDisplay(detail.getStatus_display());
 
-            switch (Status.toStatus(detail.getStatus())) {
+            switch (SaleStatus.toStatus(detail.getStatus())) {
               case FOR_SALE:
                 view.setupForSale();
                 break;

@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import io.github.ovso.heytest.R;
-import io.github.ovso.heytest.data.Status;
+import io.github.ovso.heytest.data.SaleStatus;
 import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.ui.base.adapter.BaseViewHolder;
 
@@ -41,7 +41,7 @@ public class MainViewHolder extends BaseViewHolder {
     distanceTextView.setText(Car.toDistance(context, cars.getMileage()));
     priceTextView.setText(Car.toPrice(context, cars.getPrice()));
 
-    switch (Status.toStatus(cars.getStatus())) {
+    switch (SaleStatus.toStatus(cars.getStatus())) {
 
       case FOR_SALE:
         statusTextView.setBackgroundColor(

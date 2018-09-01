@@ -12,6 +12,8 @@ public interface MainPresenter {
 
   void onNewIntent(Intent intent);
 
+  void onLoadMore();
+
   interface View {
 
     void navigateToBrand();
