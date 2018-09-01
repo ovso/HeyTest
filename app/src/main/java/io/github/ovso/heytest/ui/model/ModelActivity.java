@@ -13,6 +13,7 @@ import io.github.ovso.heytest.ui.base.adapter.BaseAdapterView;
 import io.github.ovso.heytest.ui.base.adapter.MyViewRecyclerView;
 import io.github.ovso.heytest.ui.base.adapter.OnRecyclerViewItemClickListener;
 import io.github.ovso.heytest.ui.detail.DetailActivity;
+import io.github.ovso.heytest.ui.main.MainActivity;
 import io.github.ovso.heytest.ui.model.adapter.ModelAdapter;
 import javax.inject.Inject;
 
@@ -61,6 +62,23 @@ public class ModelActivity extends BaseActivity implements ModelPresenter.View,
   @Override public void navigateToDetail(Car car) {
     Intent intent = new Intent(this, DetailActivity.class);
     intent.putExtra("data", car);
+    startActivity(intent);
+  }
+
+  @Override public void navigateToMain(int id) {
+    Intent intent = new Intent(this, MainActivity.class);
+    intent.putExtra("id", id);
+    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    startActivity(intent);
+  }
+
+  @Override public void navigateToMain(int id, String name) {
+    Intent intent = new Intent(this, MainActivity.class);
+    intent.putExtra("id", id);
+    intent.putExtra("name", name);
+    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     startActivity(intent);
   }
 

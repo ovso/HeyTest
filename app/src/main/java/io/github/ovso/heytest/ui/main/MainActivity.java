@@ -74,4 +74,9 @@ public class MainActivity extends BaseActivity implements MainPresenter.View,
   @Override public void onListItemClick(View view, Object data, int itemPosition) {
     presenter.onListItemClick(data, itemPosition);
   }
+
+  @Override protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    presenter.onNewIntent(intent);
+  }
 }

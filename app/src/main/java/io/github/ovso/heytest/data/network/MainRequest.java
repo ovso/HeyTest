@@ -27,14 +27,17 @@ public class MainRequest extends BaseRequest<MainService> {
     return ApiEndPoint.CARS.getUrl();
   }
 
-  public Single<List<Car>> getCars() {
-    Map<String, String> queryMap = new HashMap<>();
+  public Single<List<Car>> getCars(int page) {
+    Map<String, Object> queryMap = new HashMap<>();
     queryMap.put("format", "json");
-    queryMap.put("page", "1");
+    queryMap.put("page", page);
     return getApi().getCars(queryMap);
   }
 
-  public Single<Object> getCarDetail() {
-    return getApi().getCarDetail(3113);
+  public Single<List<Car>> getCars(int page, int modelId) {
+    Map<String, Object> queryMap = new HashMap<>();
+    queryMap.put("format", "json");
+    queryMap.put("page", page);
+    return getApi().getCars(queryMap, modelId);
   }
 }

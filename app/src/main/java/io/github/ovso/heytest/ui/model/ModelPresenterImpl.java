@@ -66,12 +66,9 @@ public class ModelPresenterImpl implements ModelPresenter {
 
   @Override public void onListItemClick(Object data) {
     if (data instanceof Model) {
-      Map<String, Object> dataMap = new HashMap<>();
-      dataMap.put("id", ((Model) data).getId());
-      dataMap.put("model_part_name", ((Model) data).getName());
-      String json = new JSONObject(dataMap).toString();
-      Car car = new Gson().fromJson(json, Car.class);
-      view.navigateToDetail(car);
+      int id = ((Model) data).getId();
+      String name = ((Model) data).getName();
+      view.navigateToMain(id, name);
     }
   }
 }

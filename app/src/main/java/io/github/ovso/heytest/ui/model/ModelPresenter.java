@@ -25,5 +25,9 @@ public interface ModelPresenter {
     void navigateToModel(int id);
 
     void navigateToDetail(Car car);
+
+    void navigateToMain(int id);
+
+    void navigateToMain(int id, String name);
   }
 }
