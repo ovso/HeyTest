@@ -59,8 +59,8 @@ public class ModelGroupPresenterImpl implements ModelGroupPresenter {
   }
 
   @Override public void onListItemClick(Object data) {
-    if(data instanceof ModelGroupDetail) {
-      view.navigateToModel(((ModelGroupDetail) data).getId());
+    if(data instanceof ModelGroup) {
+      view.navigateToModel(((ModelGroup) data).getId());
     }
 
   }

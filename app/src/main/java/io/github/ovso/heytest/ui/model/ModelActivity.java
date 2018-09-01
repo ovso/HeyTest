@@ -51,7 +51,7 @@ public class ModelActivity extends BaseActivity implements ModelPresenter.View,
   }
 
   @Override public void setTitle(String title) {
-    setTitle(title);
+    super.setTitle(title);
   }
 
   @Override public void navigateToModel(int id) {
