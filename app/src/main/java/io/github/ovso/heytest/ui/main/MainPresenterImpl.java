@@ -23,6 +23,7 @@ public class MainPresenterImpl implements MainPresenter {
   private SchedulersFacade schedulers;
   private BaseAdapterDataModel<Car> adapterDataModel;
   private RequestType requestType;
+  private int id;
   private int page = 1;
 
   public MainPresenterImpl(MainPresenter.View $view, ResourceProvider $ResourceProvider,
@@ -40,6 +41,33 @@ public class MainPresenterImpl implements MainPresenter {
 
     view.showSearchText(resourceProvider.getString(R.string.car_search));
     view.setupRecyclerView();
+
+    reqAllCar();
+  }
+
+  @Override public void onSearchClick() {
+    view.navigateToBrand();
+  }
+
+  @Override public void onListItemClick(Object data, int itemPosition) {
+    Timber.d("data = " + data);
+    view.navigateToDetail(data);
+  }
+
+  @Override public void onNewIntent(Intent intent) {
+    page = 0;
+    requestType = RequestType.SINGLE;
+    adapterDataModel.clear();
+    view.refresh();
+    if (intent.hasExtra("id") && intent.hasExtra("name")) {
+      view.showSearchText(intent.getStringExtra("name"));
+      id = intent.getIntExtra("id", 0);
+
+      reqSingleCar();
+    }
+  }
+
+  private void reqAllCar() {
     compositeDisposable.add(
         mainRequest.getCars(page).subscribeOn(schedulers.io()).observeOn(schedulers.ui()).subscribe(
             new Consumer<List<Car>>() {
@@ -55,49 +83,33 @@ public class MainPresenterImpl implements MainPresenter {
             }));
   }
 
-  @Override public void onSearchClick() {
-    view.navigateToBrand();
-  }
-
-  @Override public void onListItemClick(Object data, int itemPosition) {
-    Timber.d("data = " + data);
-    view.navigateToDetail(data);
-  }
-
-  @Override public void onNewIntent(Intent intent) {
-    requestType = RequestType.SINGLE;
-
-    if (intent.hasExtra("id") && intent.hasExtra("name")) {
-      view.showSearchText(intent.getStringExtra("name"));
-      int id = intent.getIntExtra("id", 0);
-
-      Disposable disposable = mainRequest.getCars(page, id)
-          .subscribeOn(schedulers.io())
-          .observeOn(schedulers.ui())
-          .subscribe(
-              new Consumer<List<Car>>() {
-                @Override public void accept(List<Car> cars) throws Exception {
-                  adapterDataModel.clear();
-                  view.refresh();
-                  adapterDataModel.addAll(cars);
-                  view.refresh();
-                }
-              }, new Consumer<Throwable>() {
-                @Override public void accept(Throwable throwable) throws Exception {
-                  Timber.d(throwable);
-                }
-              });
-      compositeDisposable.add(disposable);
-    }
+  private void reqSingleCar() {
+    Disposable disposable = mainRequest.getCars(page, id)
+        .subscribeOn(schedulers.io())
+        .observeOn(schedulers.ui())
+        .subscribe(
+            new Consumer<List<Car>>() {
+              @Override public void accept(List<Car> cars) throws Exception {
+                view.refresh();
+                adapterDataModel.addAll(cars);
+                view.refresh();
+              }
+            }, new Consumer<Throwable>() {
+              @Override public void accept(Throwable throwable) throws Exception {
+                Timber.d(throwable);
+              }
+            });
+    compositeDisposable.add(disposable);
   }
 
   @Override public void onLoadMore() {
+    page++;
     switch (requestType) {
-
       case ALL:
-
+        reqAllCar();
         break;
       case SINGLE:
+        reqSingleCar();
         break;
     }
   }

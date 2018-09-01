@@ -102,19 +102,19 @@ public class DetailActivity extends BaseActivity implements DetailPresenter.View
   }
 
   @Override public void setupForSale() {
-    button.setBackgroundResource(R.drawable.ripple_status_1);
+    button.setBackgroundResource(R.drawable.selector_status_1);
     statusDisplayTextView.setTextColor(ContextCompat.getColor(this,android.R.color.holo_blue_dark));
     priceTextView.setTextColor(ContextCompat.getColor(this, android.R.color.black));
   }
 
   @Override public void setupOnSale() {
-    button.setBackgroundResource(R.drawable.ripple_status_2);
+    button.setBackgroundResource(R.drawable.selector_status_2);
     statusDisplayTextView.setTextColor(ContextCompat.getColor(this,android.R.color.holo_green_dark));
     priceTextView.setTextColor(ContextCompat.getColor(this, android.R.color.black));
   }
 
   @Override public void setupSoldOut() {
-    button.setBackgroundResource(R.drawable.ripple_status_3);
+    button.setBackgroundResource(R.drawable.selector_status_3);
     statusDisplayTextView.setTextColor(ContextCompat.getColor(this,android.R.color.darker_gray));
   }
 
