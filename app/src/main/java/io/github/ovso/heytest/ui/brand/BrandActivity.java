@@ -1,5 +1,6 @@
 package io.github.ovso.heytest.ui.brand;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import io.github.ovso.heytest.ui.base.adapter.BaseAdapterView;
 import io.github.ovso.heytest.ui.base.adapter.MyViewRecyclerView;
 import io.github.ovso.heytest.ui.base.adapter.OnRecyclerViewItemClickListener;
 import io.github.ovso.heytest.ui.brand.adapter.BrandAdapter;
+import io.github.ovso.heytest.ui.model_group.ModelGroupActivity;
 import javax.inject.Inject;
 
 public class BrandActivity extends BaseActivity implements BrandPresenter.View,
@@ -52,8 +54,14 @@ public class BrandActivity extends BaseActivity implements BrandPresenter.View,
     super.setTitle(title);
   }
 
-  @Override public void onListItemClick(View view, Object data, int itemPosition) {
+  @Override public void navigateToModelGroup(int id) {
+    Intent intent = new Intent(this, ModelGroupActivity.class);
+    intent.putExtra("id", id);
+    startActivity(intent);
+  }
 
+  @Override public void onListItemClick(View view, Object data, int itemPosition) {
+    presenter.onListItemClick(data);
   }
 
   @Override public boolean isTitle() {

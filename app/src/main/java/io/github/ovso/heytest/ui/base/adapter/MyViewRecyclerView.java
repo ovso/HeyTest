@@ -35,11 +35,8 @@ public class MyViewRecyclerView extends RecyclerView {
 
   private void setOnItemClickListener(Adapter adapter) {
     if (!ObjectUtils.isEmpty(adapter)) {
-      if ((adapter instanceof MainAdapter)) {
-        ((MainAdapter) adapter).setOnRecyclerViewItemClickListener(
-            onRecyclerViewItemClickListener);
-      } else if (adapter instanceof BrandAdapter) {
-        ((BrandAdapter) adapter).setOnRecyclerViewItemClickListener(
+      if ((adapter instanceof BaseRecyclerAdapter)) {
+        ((BaseRecyclerAdapter) adapter).setOnRecyclerViewItemClickListener(
             onRecyclerViewItemClickListener);
       }
     }

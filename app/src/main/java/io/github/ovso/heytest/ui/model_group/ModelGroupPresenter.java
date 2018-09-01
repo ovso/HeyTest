@@ -1,9 +1,9 @@
-package io.github.ovso.heytest.ui.brand;
+package io.github.ovso.heytest.ui.model_group;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 
-public interface BrandPresenter {
+public interface ModelGroupPresenter {
 
   void onCreate(@NonNull Intent intent);
 
@@ -21,6 +21,6 @@ public interface BrandPresenter {
 
     void setTitle(String title);
 
-    void navigateToModelGroup(int id);
+    void navigateToModel(int id);
   }
 }

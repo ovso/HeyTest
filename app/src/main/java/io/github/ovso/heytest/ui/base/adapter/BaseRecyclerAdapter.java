@@ -2,6 +2,7 @@ package io.github.ovso.heytest.ui.base.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+import lombok.Setter;
 
 public abstract class BaseRecyclerAdapter
     extends RecyclerView.Adapter<BaseViewHolder> {
@@ -13,4 +14,6 @@ public abstract class BaseRecyclerAdapter
   @Override public abstract void onBindViewHolder(BaseViewHolder viewHolder, int position);
 
   @Override public abstract int getItemCount();
+
+  @Setter protected OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
 }

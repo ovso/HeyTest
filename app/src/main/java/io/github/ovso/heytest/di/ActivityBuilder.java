@@ -14,6 +14,8 @@ import io.github.ovso.heytest.ui.main.di.MainActivityModule;
 import io.github.ovso.heytest.ui.main.di.MainActivityViewModule;
 import io.github.ovso.heytest.ui.model.ModelActivity;
 import io.github.ovso.heytest.ui.model_group.ModelGroupActivity;
+import io.github.ovso.heytest.ui.model_group.di.ModelGroupActivityModule;
+import io.github.ovso.heytest.ui.model_group.di.ModelGroupActivityViewModule;
 import javax.inject.Singleton;
 
 @Module(includes = { AndroidSupportInjectionModule.class })
@@ -31,6 +33,8 @@ public abstract class ActivityBuilder {
   abstract BrandActivity bindBrandActivity();
 
   @Singleton @ContributesAndroidInjector(modules = {
+      ModelGroupActivityModule.class,
+      ModelGroupActivityViewModule.class
   })
   abstract ModelGroupActivity bindModelGroupActivity();
 

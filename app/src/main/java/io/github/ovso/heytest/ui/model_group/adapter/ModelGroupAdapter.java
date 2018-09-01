@@ -1,8 +1,7 @@
-package io.github.ovso.heytest.ui.brand.adapter;
+package io.github.ovso.heytest.ui.model_group.adapter;
 
 import android.view.ViewGroup;
-import io.github.ovso.heytest.data.network.model.Brand;
-import io.github.ovso.heytest.data.network.model.Car;
+import io.github.ovso.heytest.data.network.model.ModelGroup;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterDataModel;
 import io.github.ovso.heytest.ui.base.adapter.BaseAdapterView;
 import io.github.ovso.heytest.ui.base.adapter.BaseRecyclerAdapter;
@@ -12,18 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Setter;
 
-public class BrandAdapter extends BaseRecyclerAdapter implements BaseAdapterView,
-    BaseAdapterDataModel<Brand> {
-  private List<Brand> items = new ArrayList<>();
+public class ModelGroupAdapter extends BaseRecyclerAdapter implements BaseAdapterView,
+    BaseAdapterDataModel<ModelGroup> {
+  @Setter private OnRecyclerViewItemClickListener onRecyclerViewItemClickListener;
+  private List<ModelGroup> items = new ArrayList<>();
 
   @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    return BrandViewHolder.create(parent);
+    return ModelGroupViewHolder.create(parent);
   }
 
   @Override
   public void onBindViewHolder(BaseViewHolder viewHolder, int position) {
-    if (viewHolder instanceof BrandViewHolder) {
-      BrandViewHolder holder = (BrandViewHolder) viewHolder;
+    if (viewHolder instanceof ModelGroupViewHolder) {
+      ModelGroupViewHolder holder = (ModelGroupViewHolder) viewHolder;
       holder.bind(items.get(position));
       holder.setOnRecyclerViewItemClickListener(onRecyclerViewItemClickListener);
       holder.setItemPosition(position);
@@ -34,23 +34,23 @@ public class BrandAdapter extends BaseRecyclerAdapter implements BaseAdapterView
     return getSize();
   }
 
-  @Override public void add(Brand item) {
+  @Override public void add(ModelGroup item) {
     items.add(item);
   }
 
-  @Override public void addAll(List<Brand> $items) {
+  @Override public void addAll(List<ModelGroup> $items) {
     items.addAll($items);
   }
 
-  @Override public Brand remove(int position) {
+  @Override public ModelGroup remove(int position) {
     return items.remove(position);
   }
 
-  @Override public Brand getItem(int position) {
+  @Override public ModelGroup getItem(int position) {
     return items.get(position);
   }
 
-  @Override public void add(int index, Brand item) {
+  @Override public void add(int index, ModelGroup item) {
     items.add(index, item);
   }
 

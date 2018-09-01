@@ -1,6 +1,5 @@
 package io.github.ovso.heytest.ui.base.adapter;
 
-import android.support.annotation.CallSuper;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import butterknife.ButterKnife;
@@ -13,7 +12,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
   }
 
   protected Object data;
-  @CallSuper public void bind(Object $data) {
+  protected void bind(Object $data) {
     data = $data;
   }
 
