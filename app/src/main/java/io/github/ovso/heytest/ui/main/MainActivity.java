@@ -55,7 +55,6 @@ public class MainActivity extends BaseActivity implements MainPresenter.View,
   }
 
   @Override public void setupRecyclerView() {
-    //recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
     recyclerView.setLayoutManager(new LinearLayoutManager(this));
     recyclerView.setAdapter(adapter);
     recyclerView.setOnItemClickListener(this);

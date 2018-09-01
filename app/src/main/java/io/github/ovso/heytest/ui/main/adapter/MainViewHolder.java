@@ -2,6 +2,7 @@ package io.github.ovso.heytest.ui.main.adapter;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import com.bumptech.glide.Glide;
 import io.github.ovso.heytest.R;
+import io.github.ovso.heytest.data.Status;
 import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.ui.base.adapter.BaseViewHolder;
 
@@ -22,6 +24,7 @@ public class MainViewHolder extends BaseViewHolder {
   @BindView(R.id.distance_text_view) TextView distanceTextView;
   @BindView(R.id.price_text_view) TextView priceTextView;
   @BindView(R.id.root_view) ConstraintLayout rootView;
+  @BindView(R.id.status_text_view) TextView statusTextView;
 
   private MainViewHolder(View itemView) {
     super(itemView);
@@ -37,6 +40,24 @@ public class MainViewHolder extends BaseViewHolder {
     yearTextView.setText(Car.toYear(context, cars.getYear()));
     distanceTextView.setText(Car.toDistance(context, cars.getMileage()));
     priceTextView.setText(Car.toPrice(context, cars.getPrice()));
+
+    switch (Status.toStatus(cars.getStatus())) {
+
+      case FOR_SALE:
+        statusTextView.setBackgroundColor(
+            ContextCompat.getColor(context, android.R.color.holo_blue_dark));
+        break;
+      case ON_SALE:
+        statusTextView.setBackgroundColor(
+            ContextCompat.getColor(context, android.R.color.holo_green_dark));
+        break;
+      case SOLD_OUT:
+        statusTextView.setBackgroundColor(
+            ContextCompat.getColor(context, android.R.color.darker_gray));
+        break;
+    }
+    statusTextView.setText(cars.getStatus_display());
+
   }
 
   public static MainViewHolder create(ViewGroup parent) {
