@@ -9,4 +9,5 @@
   <string name="brand_select">브랜드 선택</string>
   <string name="model_group_select">차종 선택</string>
   <string name="model_select">모델 선택</string>
+  <string name="call">연락하기</string>
 </resources>

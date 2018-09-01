@@ -32,5 +32,11 @@ public interface DetailPresenter {
     void showFuel(String fuel);
 
     void showStatusDisplay(String statusDisplay);
+
+    void setupForSale();
+
+    void setupOnSale();
+
+    void setupSoldOut();
   }
 }

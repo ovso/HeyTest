@@ -153,6 +153,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="연락하기"
+        android:textColor="@android:color/white"
+        android:text="@string/call"
         />
   </android.support.constraint.ConstraintLayout>
 </LinearLayout>

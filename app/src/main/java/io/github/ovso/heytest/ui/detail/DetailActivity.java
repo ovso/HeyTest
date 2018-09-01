@@ -3,6 +3,7 @@ package io.github.ovso.heytest.ui.detail;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatRadioButton;
 import android.widget.Button;
@@ -98,6 +99,23 @@ public class DetailActivity extends BaseActivity implements DetailPresenter.View
 
   @Override public void showStatusDisplay(String statusDisplay) {
     statusDisplayTextView.setText(statusDisplay);
+  }
+
+  @Override public void setupForSale() {
+    button.setBackgroundResource(R.drawable.ripple_status_1);
+    statusDisplayTextView.setTextColor(ContextCompat.getColor(this,android.R.color.holo_blue_dark));
+    priceTextView.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+  }
+
+  @Override public void setupOnSale() {
+    button.setBackgroundResource(R.drawable.ripple_status_2);
+    statusDisplayTextView.setTextColor(ContextCompat.getColor(this,android.R.color.holo_green_dark));
+    priceTextView.setTextColor(ContextCompat.getColor(this, android.R.color.black));
+  }
+
+  @Override public void setupSoldOut() {
+    button.setBackgroundResource(R.drawable.ripple_status_3);
+    statusDisplayTextView.setTextColor(ContextCompat.getColor(this,android.R.color.darker_gray));
   }
 
   @OnPageChange(value = R.id.view_pager, callback = OnPageChange.Callback.PAGE_SELECTED)

@@ -3,6 +3,7 @@ package io.github.ovso.heytest.ui.detail;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import io.github.ovso.heytest.App;
+import io.github.ovso.heytest.data.Status;
 import io.github.ovso.heytest.data.network.DetailRequest;
 import io.github.ovso.heytest.data.network.model.Car;
 import io.github.ovso.heytest.data.network.model.CarDetail;
@@ -35,16 +36,28 @@ public class DetailPresenterImpl implements DetailPresenter {
         .subscribeOn(schedulersFacade.io())
         .observeOn(schedulersFacade.ui())
         .subscribe(new Consumer<CarDetail>() {
-          @Override public void accept(CarDetail carDetail) throws Exception {
-            view.setupImages(carDetail.getImage_urls());
-            view.setupPagenation(carDetail.getImage_urls().size());
-            view.showPrice(Car.toPrice(context, carDetail.getPrice()));
-            view.showCarNumber(carDetail.getCar_number());
-            view.showMileage(Car.toDistance(context,carDetail.getMileage()));
-            view.showInitialRegistrationDate(carDetail.getInitial_registration_date());
-            view.showYear(Car.toYear(context,carDetail.getYear()));
-            view.showFuel(carDetail.getFuel());
-            view.showStatusDisplay(carDetail.getStatus_display());
+          @Override public void accept(CarDetail detail) throws Exception {
+            view.setupImages(detail.getImage_urls());
+            view.setupPagenation(detail.getImage_urls().size());
+            view.showPrice(Car.toPrice(context, detail.getPrice()));
+            view.showCarNumber(detail.getCar_number());
+            view.showMileage(Car.toDistance(context, detail.getMileage()));
+            view.showInitialRegistrationDate(detail.getInitial_registration_date());
+            view.showYear(Car.toYear(context, detail.getYear()));
+            view.showFuel(detail.getFuel());
+            view.showStatusDisplay(detail.getStatus_display());
+
+            switch (Status.toStatus(detail.getStatus())) {
+              case FOR_SALE:
+                view.setupForSale();
+                break;
+              case ON_SALE:
+                view.setupOnSale();
+                break;
+              case SOLD_OUT:
+                view.setupSoldOut();
+                break;
+            }
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(Throwable throwable) throws Exception {
